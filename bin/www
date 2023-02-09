@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+//Default
 /**
  * Module dependencies.
  */
@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('portal-final:server');
 var http = require('http');
-var socketio = require('socket.io');
 
 /**
  * Get port from environment and store in Express.
@@ -89,3 +88,16 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+//End of default
+
+
+// Server-side of the socket
+
+var socketio = require('socket.io');
+var io = socketio(server);
+
+io.on('connection', socket=>{
+  socket.on('joinRoom', (Room)=>{
+    
+  });
+});
