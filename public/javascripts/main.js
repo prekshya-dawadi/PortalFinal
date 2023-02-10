@@ -33,7 +33,7 @@
     outputMessage(message);
     console.log(message);
     //scroll down
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatMessage.scrollTop = chatMessage.scrollHeight;
   });
 
   // Output message to DOM

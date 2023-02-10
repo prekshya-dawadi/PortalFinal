@@ -28,8 +28,7 @@ router.post('/cardsinfo', async function(req, res, next){
 });
 
 router.post('/usernameProcess', async function(req, res, next){
-  const globalVariable = {username : req.body.username};
-  await console.log("From inside the router: ", globalVariable.username);
+  username = req.body.username;
   res.render('chat-window');
 });
 
