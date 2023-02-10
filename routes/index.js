@@ -28,7 +28,9 @@ router.post('/cardsinfo', async function(req, res, next){
 });
 
 router.post('/usernameProcess', async function(req, res, next){
-  username = req.body.username;
+  console.log('I am inside the usernameProcess route');
+  username = await req.body.username;
+  console.log("From inside the router: ", username);
   res.render('chat-window');
 });
 
