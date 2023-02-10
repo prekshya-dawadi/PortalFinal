@@ -1,0 +1,53 @@
+Socket used for chat. 
+To track changes in users and rooms, the information is directly taken from the url, and for that a library called query-string is used.
+
+utils folder used for small snippets of codes to be used throughout the application
+
+code for the overlay:
+<!-- Overlay for username input -->
+
+  <!-- <div id="overlay">
+    <div id="overlay-text">
+      <p>Username for this room: </p>
+      <input type="text" id="username" placeholder="Enter username"/>
+      <a href="chat/<%= cards._id%>"><Button id="overlay-enter-button" type="submit">Enter</Button></a>
+      <button id="exitButton" onclick = "off()">Exit</button>
+    </div>
+  </div>
+
+  
+  <script>
+    on=()=>{
+      document.getElementById("overlay").style.display="block";
+    }
+    off=()=>{
+      document.getElementById("overlay").style.display="none";
+    }
+    const btn = document.getElementById('overlay-enter-button');
+    btn.addEventListener('submit', function handleClick(event){
+      event.preventDefault(); //prevents page reload incase of uses of form
+      const username = document.getElementById('username');
+      //Do something with the username
+      const user = username.value;
+            
+      username.value='';
+    });
+  </script> -->
+
+
+
+Socket code:
+    });
+
+    // Broadcast when a user connects- emits to all the 
+    // users except the broadcaster.
+    socket.broadcast.to(Room).emit('message', formatMessage(bot,'A user has joined the chat'));
+    
+      // Listen for chatMessage
+    socket.on('chatMessage', (msg)=>{
+      io.emit('message',formatMessage('user', msg));
+    });
+
+    //Runs when the client disconnects
+    socket.on('disconnect', ()=>{
+      io.emit('message',formatMessage(bot,'A user has left the chat.'));

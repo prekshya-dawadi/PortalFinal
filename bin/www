@@ -95,9 +95,32 @@ function onListening() {
 
 var socketio = require('socket.io');
 var io = socketio(server);
+var formatMessage = require('../utils/messages');
+var userJoin = require('../utils/users');
+var bot = "channel bot";
 
 io.on('connection', socket=>{
   socket.on('joinRoom', (Room)=>{
+    const user = userJoin(socket.id, globalVariable.username, Room);
+    console.log("Value read from socket server: ", globalVariable.username);
     
+    // Welcome Current User
+    socket.emit('message', formatMessage(bot, 'Welcome to the Channel!'));
+
+    // Broadcast when a user connects
+    socket.broadcast.to(user.room).emit(
+      'message',
+      formatMessage(bot, `${globalVariable.username} has joined the chat`)
+    );
+
+    //Listen for a chatMessage
+    socket.on('chatMessage', msg =>{
+      io.to(user.room).emit('message', formatMessage(globalVariable.username, msg));
+    });
+
+    //Runs when the clients disconnect
+    socket.on('disconnect', ()=> {
+      io.to(user.room).emit('message', formatMessage(bot, `${globalVariable.username} has left the chat.`));
+    });
   });
 });

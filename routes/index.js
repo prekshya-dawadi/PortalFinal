@@ -27,6 +27,12 @@ router.post('/cardsinfo', async function(req, res, next){
   res.redirect('/chatrooms');
 });
 
+router.post('/usernameProcess', async function(req, res, next){
+  const globalVariable = {username : req.body.username};
+  await console.log("From inside the router: ", globalVariable.username);
+  res.render('chat-window');
+});
+
 router.get('/chat/:channel_id', function(req, res, next){
   res.render('chat-window');
 });
