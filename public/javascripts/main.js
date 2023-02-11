@@ -2,7 +2,7 @@
   //The chat-content that is to fill the space
   const chatForm = document.getElementById('chat-form');
   //Space where the chat messages is to be shown
-  const chatMessage = document.querySelector(".chat-messages");
+  const chatMessages = document.querySelector('.chat-messages');
 
   const socket = io();
 
@@ -21,15 +21,15 @@
     var msg = e.target.elements.msg.value;
 
     // emit message to server
-    socket.emit("chatMessage", msg);
+    socket.emit('chatMessage', msg);
 
     //clear inputs
-    e.target.elements.msg.value = "";
+    e.target.elements.msg.value = '';
     e.target.elements.msg.focus();
   });
 
   //Message from server
-  socket.on("message", (message) => {
+  socket.on('message', message => {
     outputMessage(message);
     console.log(message);
     //scroll down
@@ -38,13 +38,13 @@
 
   // Output message to DOM
   function outputMessage(message) {
-    const div = document.createElement("div");
-    div.classList.add("message");
+    const div = document.createElement('div');
+    div.classList.add('message');
     div.innerHTML = `<p class="meta>${message.username} <span>${message.time}</span></p>
     <p class = 'text'>
         ${message.text}
     </p>`;
-    document.querySelector(".chat-messages").appendChild(div);
+    document.querySelector('.chat-messages').appendChild(div);
   }
 
   //Rooms
