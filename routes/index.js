@@ -36,4 +36,8 @@ router.get('/chat/:channel_id', function(req, res, next){
   res.render('chat-window');
 });
 
+router.get('/username', function(req, res, next){
+  res.render('username');
+});
+
 module.exports = router;
