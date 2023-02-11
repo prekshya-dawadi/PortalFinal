@@ -100,26 +100,30 @@ var {userJoin} = require('../utils/users');
 var bot = "channel bot";
 
 io.on('connection', socket=>{
-  socket.on('joinRoom', (Room)=>{
-    const user = userJoin(socket.id, username, Room);
-    
+  socket.on('joinRoom', (Room) =>{
+    const user = userJoin(socket.id,username, Room);
+    socket.join(user.room);
+
+    console.log(user);
+    console.log(bot);
+
     // Welcome Current User
-    socket.emit('message', formatMessage(bot, 'Welcome to the Channel!'));
+    socket.emit('message', formatMessage(bot, 'Welcome to the channel!'));
 
     // Broadcast when a user connects
     socket.broadcast.to(user.room).emit(
       'message',
       formatMessage(bot, `${username} has joined the chat`)
-    );
+    ); 
 
-    //Listen for a chatMessage
+      //Listen for chatMessage
     socket.on('chatMessage', msg =>{
       io.to(user.room).emit('message', formatMessage(username, msg));
     });
-
-    //Runs when the clients disconnect
-    socket.on('disconnect', ()=> {
+    //Runs when client disconnects
+    socket.on('disconnect', ()=>{
       io.to(user.room).emit('message', formatMessage(bot, `${username} has left the chat.`));
     });
+  // all the clients -> io.emit()
   });
 });
