@@ -14,6 +14,17 @@
 
   <div class="chat-container">
 
+    <!--Overlay for username input -->
+   <div id="overlay">
+    <div id="overlay-text">
+      <p>Username for this room: </p>
+      <form action = "usernameProcess" method="post">
+        <input type="text" id="username" name= 'username' placeholder="Enter username" />
+        <Button id="overlay-enter-button" type="submit" ondblclick="off()">Enter</Button>
+      </form>
+    </div>
+  </div>
+
     <header class="chat-header">
       <h1><i class="fas fa-smile"></i> Portal</h1>
       <a href="/chatrooms"><button>Leave Room </button></a>
@@ -24,7 +35,11 @@
         <h2 id="room-name">Channel</h2>
         <h3><i class="fas fa-users"></i> Users</h3>
         <ul id="users">
-            <!--List of users online-->
+          <li>user1</li>
+          <li>user2</li>
+          <li>user3</li>
+          <li>user4</li>
+          <li>user5</li>
         </ul>
       </div>
       <div class="chat-messages">
